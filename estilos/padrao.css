@@ -1,0 +1,32 @@
+:root {
+    --fundo: #8482a3;
+    --font-color: #2a4453;
+    --fundo-botao: #5d507a;
+    --font-botao: #ffffffc2;
+    --borda-redonda: 5px;
+}
+
+* {
+    font-family: 'Heebo', sans-serif;
+}
+
+body {
+    background-color: var(--fundo);
+    color: var(--font-color);
+}
+
+input {
+    height: 30px;
+    width: 100%;
+    border-radius: var(--borda-redonda);
+}
+
+button, input[type=submit] {
+    border-radius: var(--borda-redonda);
+    height: 40px;
+    width: 20%;
+    background-color: var(--fundo-botao);
+    color: var(--font-botao);
+    border: none;
+    
+}
