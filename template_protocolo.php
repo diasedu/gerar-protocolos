@@ -1,7 +1,9 @@
 <?php
 
-$nome = $_POST['nome'];
-$exames = $_POST['exames'];
+$nome    = $_POST['nome'];
+$exames  = $_POST['exames'];
+$empresa = $_POST['empresa'];
+$data    = $_POST['data'];
 
 
 include './vendor/autoload.php';
@@ -20,6 +22,9 @@ $sheet->setCellValue('A1', 'PROTOCOLO DE EMPRESAS');
 $sheet->setCellValue('A8', 'EMPRESA');
 $sheet->setCellValue('A9', 'NOME DO REALIZADOR');
 $sheet->setCellValue('A10', 'DATA');
+
+$sheet->setCellValue('B8', "{$empresa}");
+$sheet->setCellValue('B10', "{$data}");
 
 
 # mescla de células do cabeçalho

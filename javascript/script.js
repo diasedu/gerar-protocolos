@@ -1,7 +1,9 @@
 // função construtora que irá armazenar o nome e os exames da pessoa;
-function Cadastro_de_colaborador(nome, exames) {
-    this.nome = nome
-    this.exames = exames
+function Cadastro_de_colaborador(nome, exames, empresa, data) {
+    this.nome      = nome
+    this.exames    = exames
+    this.empresa   = empresa;
+    this.data      = data;
 }
 
 // função que cria a estrutura de linha, coluna e span para representar o texto
@@ -32,12 +34,14 @@ function criar_estruturas_tabela(...texto) {
     
 }
 
-function inserir_info_finais(nome, exames) {
+function inserir_info_finais(nome, exames, empresa, data) {
     const info_finais = document.getElementById('dados');
-    const input = [document.createElement('input'), document.createElement('input')];
+    const input = [document.createElement('input'), document.createElement('input'), document.createElement('input'), document.createElement('input')];
     
     info_finais.appendChild(input[0]);
     info_finais.appendChild(input[1]);
+    info_finais.appendChild(input[2]);
+    info_finais.appendChild(input[3]);
     
     input[0].setAttribute('type', 'hidden');
     input[0].setAttribute('name', 'nome[]');
@@ -48,7 +52,16 @@ function inserir_info_finais(nome, exames) {
     input[1].setAttribute('name', 'exames[]');
     input[1].setAttribute('value', exames);
     input[1].setAttribute('class', 'item-exame');
-    
+
+    input[2].setAttribute('type', 'hidden');
+    input[2].setAttribute('name', 'empresa');
+    input[2].setAttribute('value', empresa);
+    input[2].setAttribute('class', 'item-empresa');
+
+    input[3].setAttribute('type', 'hidden');
+    input[3].setAttribute('name', 'data');
+    input[3].setAttribute('value', data);
+    input[3].setAttribute('class', 'item-data');
 }
 
 function ordem_alfabetica(...item_nome) {
@@ -73,22 +86,24 @@ botao.addEventListener('click', e => {
     
     const cadastro = new Cadastro_de_colaborador(
         document.querySelector('#nome').value,
-        document.querySelector('#exames').value
-        );
+        document.querySelector('#exames').value,
+        document.querySelector('#nome_empresa').value,
+        document.querySelector('#data').value
+    );
         
-        // Validação. Caso algum input esteja vazio, não será possível o cadastro de uma linha em branco
-        if (cadastro.nome === '' || cadastro.exames == '') {
-            alert('Digite corretamente para prosseguir.');
-        } else {
-            // Cria a estrutura da tabela com o nome e os exames
-            criar_estruturas_tabela(cadastro.nome, cadastro.exames);
+    // Validação. Caso algum input esteja vazio, não será possível o cadastro de uma linha em branco
+    if (cadastro.nome == '' || cadastro.exames == '' || cadastro.empresa == '' || cadastro.data == '') {
+        alert('Digite corretamente para prosseguir.');
+    } else {
+        // Cria a estrutura da tabela com o nome e os exames
+        criar_estruturas_tabela(cadastro.nome, cadastro.exames);
 
-            // Criação de inputs hidden que são passados para o backend
-            inserir_info_finais(cadastro.nome, cadastro.exames);
-        }
+        // Criação de inputs hidden que são passados para o backend
+        inserir_info_finais(cadastro.nome, cadastro.exames, cadastro.empresa, cadastro.data);
+    }
         
-        // Limpa o valor dos inputs para novo cadastro
-        limpar_elemento(document.querySelector('#nome'));
-        limpar_elemento(document.querySelector('#exames'));
+    // Limpa o valor dos inputs para novo cadastro
+    limpar_elemento(document.querySelector('#nome'));
+    limpar_elemento(document.querySelector('#exames'));
         
-    });
+});
