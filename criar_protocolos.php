@@ -23,7 +23,7 @@
 
         <div>
             <label for="data">Qual é a data da realização do protocolo?</label>
-            <input type="date" id="data" />
+            <input type="date" id="data"/>
         </div>
 
         <div>

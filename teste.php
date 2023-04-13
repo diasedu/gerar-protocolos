@@ -1,5 +1,1 @@
-<?php
-
-function oi() {
-    return 'oi';
-}
+S

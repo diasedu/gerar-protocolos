@@ -36,7 +36,13 @@ function criar_estruturas_tabela(...texto) {
 
 function inserir_info_finais(nome, exames, empresa, data) {
     const info_finais = document.getElementById('dados');
-    const input = [document.createElement('input'), document.createElement('input'), document.createElement('input'), document.createElement('input')];
+
+    const input = [
+        document.createElement('input'),
+        document.createElement('input'),
+        document.createElement('input'),
+        document.createElement('input')
+    ];
     
     info_finais.appendChild(input[0]);
     info_finais.appendChild(input[1]);
@@ -64,6 +70,17 @@ function inserir_info_finais(nome, exames, empresa, data) {
     input[3].setAttribute('class', 'item-data');
 }
 
+function formatarData(data) {
+
+    const dataSeparada = { 
+        dia: data.substring(8, 10),
+        mes: data.substring(5, 7),
+        ano: data.substring(0, 4)
+    }
+
+    return data = `${dataSeparada.dia}.${dataSeparada.mes}.${dataSeparada.ano}`;
+}
+
 function ordem_alfabetica(...item_nome) {
     item_nome.value.sort();
 }
@@ -84,12 +101,16 @@ botao_alfa.addEventListener('click', e => {
 botao.addEventListener('click', e => {
     e.preventDefault();
     
+    formatarData(document.querySelector('#data').value);
+
     const cadastro = new Cadastro_de_colaborador(
         document.querySelector('#nome').value,
         document.querySelector('#exames').value,
         document.querySelector('#nome_empresa').value,
-        document.querySelector('#data').value
+        formatarData(document.querySelector('#data').value)
     );
+
+    
         
     // Validação. Caso algum input esteja vazio, não será possível o cadastro de uma linha em branco
     if (cadastro.nome == '' || cadastro.exames == '' || cadastro.empresa == '' || cadastro.data == '') {
