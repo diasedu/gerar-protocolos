@@ -15,7 +15,7 @@ $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
 
 $sheet = $spreadsheet->getActiveSheet();
 
-# Estilização da planilha
+# Configuração dos estilos da planilha
 $default_styles = [ 'font' => [ 'name' => 'Calibri', 'size' => 11 ] ];
 
 $header = [
@@ -61,6 +61,7 @@ $blueBoldFont = [
     ]
 ];
 
+# Função para alinhar a célula ao centro
 function alignTextCenter($sheet, $cell) {
     $sheet->getStyle($cell)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
     $sheet->getStyle($cell)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
@@ -69,11 +70,12 @@ function alignTextCenter($sheet, $cell) {
 
 # Array com identificação das células
 # ATENÇÃO: NUNCA ADICIONE CÉLULAS NO COMEÇO OU NO MEIO DO ARRAY, SEMPRE ADICIONAR APÓS O ÚLTIMO ÍNDICE
-$utilizedCells = ['A1', 'A8', 'A9', 'A10', 'A12', 'B8', 'B9' ,'B10', 'B12', 'C12', 'C10'];
+$utilizedCells = ['A1', 'A8', 'A9', 'A10', 'A12', 'B8', 'B9' ,'B10', 'B12', 'C12', 'C10', 'C5'];
 $sheet->getStyle('A1:L40')->applyFromArray($default_styles);
-$sheet->getStyle('A1:C5')->applyFromArray($header);
-$sheet->getStyle('A1:C5')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-$sheet->getStyle('A1:C5')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+$sheet->getStyle("{$utilizedCells[0]}:{$utilizedCells[11]}")->applyFromArray($header);
+
+alignTextCenter($sheet, "{$utilizedCells[0]}:{$utilizedCells[11]}");
+
 $sheet->getStyle('A12:C12')->applyFromArray($header);
 
 # Aqui está o cabeçalho da planilha
@@ -102,6 +104,7 @@ $sheet->setCellValue($utilizedCells[9], 'ENTREGUE');
 $sheet->getColumnDimension('A')->setAutoSize(true);
 $sheet->getColumnDimension('B')->setAutoSize(true);
 $sheet->getColumnDimension('C')->setAutoSize(true);
+alignTextCenter($sheet, "{$utilizedCells[4]}:{$utilizedCells[9]}");
   
 # Cria uma lista de acordo com os dados adicionados na tabela
 # A função da variável $id_linha é aumentar + 1 número a cada célula adicionada para que seja possível a inserção de mais de uma linha a nossa lista
