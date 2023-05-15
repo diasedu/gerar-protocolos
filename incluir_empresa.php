@@ -7,7 +7,6 @@ $fone   = $_POST["fone"];
 $adress = $_POST["adress"];
 
 include_once "./conexao.php";
-include_once "./criar_db.php";
 
 $new_table = "CREATE TABLE IF NOT EXISTS empresas(
     id INT(6) PRIMARY KEY,
