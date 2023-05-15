@@ -14,6 +14,8 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
 
 $sheet = $spreadsheet->getActiveSheet();
+$sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+$sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
 
 # Configuração dos estilos da planilha
 $default_styles = [ 'font' => [ 'name' => 'Calibri', 'size' => 11 ] ];
@@ -72,22 +74,23 @@ function alignTextCenter($sheet, $cell) {
 # ATENÇÃO: NUNCA ADICIONE CÉLULAS NO COMEÇO OU NO MEIO DO ARRAY, SEMPRE ADICIONAR APÓS O ÚLTIMO ÍNDICE
 $utilizedCells = ['A1', 'A8', 'A9', 'A10', 'A12', 'B8', 'B9' ,'B10', 'B12', 'C12', 'C10', 'C5'];
 $sheet->getStyle('A1:L40')->applyFromArray($default_styles);
-$sheet->getStyle("{$utilizedCells[0]}:{$utilizedCells[11]}")->applyFromArray($header);
+$sheet->getStyle("A1:C5")->applyFromArray($header);
 
 alignTextCenter($sheet, "{$utilizedCells[0]}:{$utilizedCells[11]}");
 
 $sheet->getStyle('A12:C12')->applyFromArray($header);
 
 # Aqui está o cabeçalho da planilha
-$sheet->setCellValue($utilizedCells[0], 'PROTOCOLO DE EMPRESAS');
-$sheet->setCellValue($utilizedCells[1], 'EMPRESA:');
-$sheet->setCellValue($utilizedCells[2], 'NOME DO REALIZADOR:');
-$sheet->setCellValue($utilizedCells[3], 'DATA:');
+$sheet->setCellValue('A1', 'PROTOCOLO DE EMPRESAS');
+$sheet->setCellValue('A8', 'EMPRESA:');
+$sheet->setCellValue('A9', 'NOME DO REALIZADOR:');
+$sheet->setCellValue('A10', 'DATA:');
 
-$sheet->setCellValue($utilizedCells[5], "{$empresa}");
-$sheet->setCellValue($utilizedCells[7], "{$data}");
-$sheet->getStyle("{$utilizedCells[1]}:{$utilizedCells[10]}")->applyFromArray($lines);
-$sheet->getStyle("{$utilizedCells[1]}:{$utilizedCells[3]}")->applyFromArray($blueBoldFont);
+$sheet->setCellValue('B8', "{$empresa}");
+$sheet->setCellValue('B9', "{$data}");
+$sheet->setCellValue('B10', "{$nomeRealizador}");
+$sheet->getStyle('A8:C10')->applyFromArray($lines);
+$sheet->getStyle('A8:C10')->applyFromArray($blueBoldFont);
 
 # mescla de células do cabeçalho
 $sheet->mergeCells('A1:C5');
@@ -97,9 +100,9 @@ $sheet->mergeCells('B10:C10');
 
 
 # Cabeçalho da lista
-$sheet->setCellValue($utilizedCells[4], 'NOME DO COLABORADOR');
-$sheet->setCellValue($utilizedCells[8], 'EXAMES');
-$sheet->setCellValue($utilizedCells[9], 'ENTREGUE');
+$sheet->setCellValue('A12', 'NOME DO COLABORADOR');
+$sheet->setCellValue('B12', 'EXAMES');
+$sheet->setCellValue('C12', 'ENTREGUE');
 
 $sheet->getColumnDimension('A')->setAutoSize(true);
 $sheet->getColumnDimension('B')->setAutoSize(true);

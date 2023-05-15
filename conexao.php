@@ -1,13 +1,12 @@
 <?php
 
-$servidor = 'localhost';
-$usuario  = '';
-$senha    = '';
+$server = 'localhost';
+$user   = 'root';
+$pass   = '';
+$db     = 'clientes';
 
-$conexao = new msqli($serivor, $usuario, $senha);
+$connect = new mysqli($server, $user, $pass, $db);
 
-if ($conexao->connect_error) {
-    die('Falha na conexão: ' . $conexao->connect_error);
+if ($connect->connect_error) {
+    die("A conexão falhou, verifique a seguir: " .  $connect->connect_error);
 }
-
-echo 'Conectado com sucesso';

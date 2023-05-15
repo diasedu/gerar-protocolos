@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="./incluir_empresa.php" method="post">
+        <label for="nome_empresa">Nome da empresa:</label>
+        <input type="text" name="name" id="name">
+
+        <label for="cnpj">CNPJ:</label>
+        <input type="text" name="cnpj" id="cnpj" minlength="14" maxlength="14">
+
+        <label for="email">E-mail:</label>
+        <input type="email" name="email" id="email">
+
+        <label for="fone">Telefone:</label>
+        <input type="tel" name="fone" id="fone">
+
+        <label for="adress">Endereço:</label>
+        <input type="text" name="adress" id="adress">
+
+
+        <button>Cadastrar empresa</button>
+    </form>
+</body>
+</html>
